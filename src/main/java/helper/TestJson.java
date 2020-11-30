@@ -1,4 +1,4 @@
-package testscripts;
+package helper;
 
 import io.restassured.RestAssured;
 import io.restassured.http.Header;

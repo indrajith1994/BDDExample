@@ -20,7 +20,7 @@ Feature: API Test
 
   Scenario: Put Request
   #getting 429 status code -  Too Many Requests
-    Given I have an endpoint url "http://dummy.restapiexample.com/api/v1/update/05"
+    Given I have an endpoint url "http://dummy.restapiexample.com/api/v1/update/"
     When I hit the put request
     Then I should validate the response code and success message after Put request
 
