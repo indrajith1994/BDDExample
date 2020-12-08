@@ -120,9 +120,6 @@
     <orderEntry type="library" name="Maven: com.github.java-json-tools:json-schema-validator:2.2.10" level="project" />
     <orderEntry type="library" name="Maven: com.github.java-json-tools:json-schema-core:1.2.10" level="project" />
     <orderEntry type="library" name="Maven: com.github.java-json-tools:jackson-coreutils:1.9" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.2.3" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.2.3" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.2.3" level="project" />
     <orderEntry type="library" name="Maven: com.github.fge:msg-simple:1.1" level="project" />
     <orderEntry type="library" name="Maven: com.github.fge:btf:1.2" level="project" />
     <orderEntry type="library" name="Maven: com.github.fge:uri-template:0.9" level="project" />
@@ -165,5 +162,9 @@
     <orderEntry type="library" name="Maven: org.codehaus.mojo:animal-sniffer-annotations:1.14" level="project" />
     <orderEntry type="library" name="Maven: com.squareup.okhttp3:okhttp:3.11.0" level="project" />
     <orderEntry type="library" name="Maven: com.squareup.okio:okio:1.14.0" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.11.3" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.11.3" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.11.3" level="project" />
+    <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.8.6" level="project" />
   </component>
 </module>

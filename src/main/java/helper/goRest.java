@@ -1,11 +1,13 @@
 package helper;
 
 import APIUtil.payload;
+import Pojo.goRestpojo;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
+import io.restassured.parsing.Parser;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
@@ -13,7 +15,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class goRest {
+import static io.restassured.RestAssured.given;
+
+public class goRest  {
     static String response = null;
     static String id = "1452";
 
@@ -31,10 +35,12 @@ public class goRest {
         for (num = 0; num < count; num++) {
             headerMap.put(list.get(num).get("Key"), list.get(num).get("Value"));
         }
-        response = RestAssured.
-                given().log().all().headers(headerMap).
+        response = given().log().all().headers(headerMap).
                 when().get("/public-api/users").
                 then().extract().response().asString();
+        goRestpojo gr = given().headers(headerMap).expect().when().get("/public-api/users/" + id).as(goRestpojo.class);
+        System.out.println(gr.getMeta());
+//        gr.
     }
 
     @When("Hitting the Get request auth param retrieve")
@@ -46,10 +52,10 @@ public class goRest {
         for (num = 0; num < count; num++) {
             headerMap.put(list.get(num).get("Key"), list.get(num).get("Value"));
         }
-        response = RestAssured.
-                given().log().all().headers(headerMap).
+        response = given().log().all().headers(headerMap).
                 when().get("/public-api/users/" + id).
                 then().extract().response().asString();
+
     }
 
     @Then("Validate Get response")
@@ -69,8 +75,7 @@ public class goRest {
         for (num = 0; num < count; num++) {
             headerMap.put(list.get(num).get("Key"), list.get(num).get("Value"));
         }
-        response = RestAssured.
-                given().log().all().headers(headerMap).body(payload.newUser()).
+        response = given().log().all().headers(headerMap).body(payload.newUser()).
                 when().post("public-api/users").
                 then().log().all().extract().response().asString();
 //                then().log().all().assertThat().statusCode(200).extract().response().asString();
@@ -96,8 +101,7 @@ public class goRest {
         for (num = 0; num < count; num++) {
             headerMap.put(list.get(num).get("Key"), list.get(num).get("Value"));
         }
-        response = RestAssured.
-                given().log().all().headers(headerMap).body(payload.updateUser()).
+        response = given().log().all().headers(headerMap).body(payload.updateUser()).
                 when().put("public-api/users/" + id).
                 then().log().all().extract().response().asString();
     }
@@ -123,8 +127,7 @@ public class goRest {
             headerMap.put(list.get(num).get("Key"), list.get(num).get("Value"));
         }
 
-        response = RestAssured.
-                given().log().all().headers(headerMap).body(payload.newUser()).
+        response = given().log().all().headers(headerMap).body(payload.newUser()).
                 when().delete("public-api/users/" + id).
                 then().log().all().extract().response().asString();
     }
