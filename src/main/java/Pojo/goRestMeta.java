@@ -3,13 +3,13 @@ package Pojo;
 import java.util.List;
 
 public class goRestMeta {
-    private List<goRestPagination> pagination;
+    private goRestPagination pagination;
 
-    public List<goRestPagination> getPagination() {
+    public goRestPagination getPagination() {
         return pagination;
     }
 
-    public void setPagination(List<goRestPagination> pagination) {
+    public void setPagination(goRestPagination pagination) {
         this.pagination = pagination;
     }
 }

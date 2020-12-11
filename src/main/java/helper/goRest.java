@@ -38,9 +38,21 @@ public class goRest  {
         response = given().log().all().headers(headerMap).
                 when().get("/public-api/users").
                 then().extract().response().asString();
-        goRestpojo gr = given().headers(headerMap).expect().when().get("/public-api/users/" + id).as(goRestpojo.class);
-        System.out.println(gr.getMeta());
-//        gr.
+//        goRestpojo gr = given().headers(headerMap).expect().when().get("/public-api/users/" + id).as(goRestpojo.class);
+        goRestpojo gr = given().log().all().headers(headerMap).
+                when().get("/public-api/users").
+                then().extract().response().as(goRestpojo.class);
+        System.out.println(gr.getCode());
+        System.out.println(gr.getMeta().getPagination().getLimit());
+        System.out.println(gr.getMeta().getPagination().getPage());
+        System.out.println(gr.getMeta().getPagination().getPages());
+        System.out.println(gr.getMeta().getPagination().getTotal());
+        System.out.println(gr.getData().get(1).getId());
+        System.out.println(gr.getData().get(1).getCreated_at());
+        System.out.println(gr.getData().get(1).getEmail());
+        System.out.println(gr.getData().get(1).getGender());
+        System.out.println(gr.getData().get(1).getStatus());
+        System.out.println(gr.getData().get(1).getUpdated_at());
     }
 
     @When("Hitting the Get request auth param retrieve")

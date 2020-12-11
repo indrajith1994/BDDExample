@@ -1,5 +1,5 @@
 Feature: goRest API Test
-  Scenario: Get Method List all user
+  Scenario: Get Method List all user 
     Given Hit endpoint url "https://gorest.co.in"
     When Hitting the Get request auth param
       | Key           | Value                                                                   |
