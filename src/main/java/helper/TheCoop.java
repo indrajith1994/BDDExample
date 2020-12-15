@@ -32,8 +32,8 @@ public class TheCoop {
     private static FileWriter file;
     static String code;
     private static String directory=System.getProperty("user.dir");
-
     private String sample=directory+"/src/main/java/testdata"+File.separator+"sample.json";
+    static  String resp = "null";
 
     @Given("The page URL is {string}")
     public void thePageURLIs(String arg0) {
@@ -71,57 +71,29 @@ public class TheCoop {
         System.out.println(response);
     }
 
-
-    @Given("make the token call {string}")
-    public void makeTheTokenCall(String arg0) {
-        RestAssured.baseURI = RestAssured.baseURI + arg0;
-    }
-
     @When("perform post token call")
-    public void     performPostTokenCall() throws JsonProcessingException {
+    public void performPostTokenCall() throws JsonProcessingException {
 
-//        response = RestAssured.given()
-//                .formParam("client_id","RestApi")
-//                .formParam("client_secret","75e3ca564180f1d9ed9ccee0f449aeb4")
-//                .formParam("grant_type","client_credentials")
-//                .post().asString();
-//        System.out.println(response);
         CoopResponse cr = given()
                 .formParam("client_id","RestApi")
                 .formParam("client_secret","75e3ca564180f1d9ed9ccee0f449aeb4")
                 .formParam("grant_type","client_credentials")
-                .post()
+                .post("http://coop.apps.symfonycasts.com/token")
                 .then().extract().response().as(CoopResponse.class);
         System.out.println("Access_token: "+cr.getAccess_token());
         System.out.println("expires_in: "+cr.getExpires_in());
         System.out.println("scope: "+cr.getScope());
         System.out.println("token_type: "+cr.getToken_type());
-        ObjectMapper mapper = new ObjectMapper();
-        //Converting the Object to JSONString
-        String jsonString = mapper.writeValueAsString(cr);
-        System.out.println(jsonString);
-        System.out.println(directory);
-
-
-        try {
-            FileWriter file = new FileWriter(sample);
-            file.write(jsonString);
-            file.close();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
 
         code = cr.getAccess_token();
         System.out.println(code);
-//
-//        String resp;
-//        resp = RestAssured.given()
-//                .auth()
-//                .oauth2(code)
-//                .post("/api/1568/barn-unlock").asString();
-//        System.out.println(resp);
+
+        String resp;
+        resp = RestAssured.given()
+                .auth()
+                .oauth2(code)
+                .post("http://coop.apps.symfonycasts.com/api/1568/barn-unlock").asString();
+        System.out.println(resp);
     }
 
     @Then("validate call")
@@ -132,24 +104,74 @@ public class TheCoop {
 
     @When("perform chickens-feed call")
     public void performChickensFeedCall() {
-        String resp = "96893b4fef12a43b4be59ce84303366815241724";
+
         resp = acccode();
         resp = RestAssured.given()
                 .auth()
                 .oauth2(resp)
-                .post("/api/1568/barn-unlock").asString();
+                .post("http://coop.apps.symfonycasts.com/api/1568/chickens-feed").asString();
         System.out.println(resp);
     }
 
-    public static String acccode(){
+    public String acccode(){
         CoopResponse cr = given()
+                .header("ContentType","application/json")
                 .formParam("client_id","RestApi")
                 .formParam("client_secret","75e3ca564180f1d9ed9ccee0f449aeb4")
                 .formParam("grant_type","client_credentials")
-                .post()
+                .post("http://coop.apps.symfonycasts.com/token")
                 .then().extract().response().as(CoopResponse.class);
+
         code = cr.getAccess_token();
         System.out.println(code);
         return code;
+    }
+
+    @Given("make the token call")
+    public void makeTheTokenCall() {
+
+    }
+
+    @When("perform toiletseat-down call")
+    public void performToiletseatDownCall() {
+        resp = acccode();
+        resp = RestAssured.given()
+                .auth()
+                .oauth2(resp)
+                .post("http://coop.apps.symfonycasts.com/api/1568/toiletseat-down").asString();
+        System.out.println(resp);
+
+    }
+
+    @When("perform barn-unlock call")
+    public void performBarnUnlockCall() {
+        resp = acccode();
+        resp = RestAssured.given()
+                .auth()
+                .oauth2(resp)
+                .post("http://coop.apps.symfonycasts.com/api/1568/barn-unlock").asString();
+        System.out.println(resp);
+
+    }
+
+    @When("perform eggs-collect call")
+    public void performEggsCollectCall() {
+        resp = acccode();
+        resp = RestAssured.given()
+                .auth()
+                .oauth2(resp)
+                .post("http://coop.apps.symfonycasts.com/api/1568/eggs-collect").asString();
+        System.out.println(resp);
+
+    }
+
+    @When("perform eggs-count call")
+    public void performEggsCountCall() {
+        resp = acccode();
+        resp = RestAssured.given()
+                .auth()
+                .oauth2(resp)
+                .post("http://coop.apps.symfonycasts.com/api/1568/eggs-count").asString();
+        System.out.println(resp);
     }
 }
