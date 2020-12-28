@@ -1,4 +1,4 @@
-package collections;
+package collections.map;
 
 import org.testng.annotations.Test;
 
