@@ -1,4 +1,4 @@
-Feature: The coop link
+Feature: The coop link with client_credentials OAUTH 2 grant type
 
   Scenario: Get the Access token
     Given make the token call

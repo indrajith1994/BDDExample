@@ -13,6 +13,8 @@ public class vectorlist {
         vec.addElement("Orange");
         vec.addElement("Mango");
         vec.addElement("Fig");
+        vec.add("Next");
+        vec.insertElementAt("Banana",1);
 
         /* check size and capacityIncrement*/
         System.out.println("Size is: "+vec.size());
