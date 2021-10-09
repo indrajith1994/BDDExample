@@ -195,6 +195,7 @@ public class ApiTesting {
                 System.out.println("Response got " + response.getBody().jsonPath().getString(list.get(num).get("Key")) + " Post request sent is " + list.get(num).get("Value") + " Matched");
             } else
                 System.out.println("not Matched");
+            System.out.println();
 
         }
     }

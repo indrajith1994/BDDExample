@@ -10,8 +10,10 @@ import java.util.Set;
 public class WindowHandle_Demo {
     public static void main(String[] args) throws Exception {
         System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
-        WebDriver driver = new ChromeDriver();
-
+        
+        WebDriver driver;
+        
+        driver = new ChromeDriver();
         driver.manage().window().maximize();
 
 // Load the website
